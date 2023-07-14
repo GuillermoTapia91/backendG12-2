@@ -1,0 +1,26 @@
+# sirve para cuando queremos manejar varias imagenes
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    ports:
+      - 5432:5432
+      # -1234:5432 # que vamos a utilzar dos puertos externos para conectar al puerto 5432 dentro de la imagen
+
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=guillermo
+      - POSTGRES_DB=prueba
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=guillermo.tapia1991@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=Welcome123
+
+    ports:
+      - 80:80
+
+    depends_on:
+      - db
